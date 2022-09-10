@@ -1,4 +1,5 @@
 using NewHorizons.External.Modules;
+using NewHorizons.External.Modules.Reflection;
 using NewHorizons.External.Modules.VariableSize;
 using Newtonsoft.Json;
 using System;
@@ -182,6 +183,11 @@ namespace NewHorizons.External.Configs
         /// Extra data that may be used by extension mods
         /// </summary>
         public object extras;
+
+        /// <summary>
+        /// Allows setting field values and calling methods when the planet is created using reflection
+        /// </summary>
+        public ReflectionModule Reflection;
 
         public PlanetConfig()
         {

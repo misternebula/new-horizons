@@ -3,6 +3,7 @@ using NewHorizons.Builder.Body;
 using NewHorizons.Builder.General;
 using NewHorizons.Builder.Orbital;
 using NewHorizons.Builder.Props;
+using NewHorizons.Builder.Reflection;
 using NewHorizons.Builder.Volumes;
 using NewHorizons.Components;
 using NewHorizons.Components.Orbital;
@@ -635,6 +636,12 @@ namespace NewHorizons.Handlers
 
             // We allow removing children afterwards so you can also take bits off of the modules you used
             if (body.Config.removeChildren != null) RemoveChildren(go, body);
+
+            // Has to go last and after all other planets are done
+            if (body.Config.Reflection != null)
+            {
+                Delay.FireOnNextUpdate(() => ReflectionBuilder.Make(go, body.Config.Reflection));
+            }
 
             return go;
         }
