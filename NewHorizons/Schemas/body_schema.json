@@ -142,6 +142,10 @@
         "type": "object"
       }
     },
+    "Reflection": {
+      "description": "Allows setting field values and calling methods when the planet is created using reflection",
+      "$ref": "#/definitions/ReflectionModule"
+    },
     "$schema": {
       "type": "string",
       "description": "The schema to validate with"
@@ -2772,6 +2776,70 @@
         "observe",
         "snapshot"
       ]
+    },
+    "ReflectionModule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Fields": {
+          "type": "array",
+          "description": "Allows modifying fields of components on any GameObject that is part of this planet on Start.",
+          "items": {
+            "$ref": "#/definitions/FieldModule"
+          }
+        },
+        "Methods": {
+          "type": "array",
+          "description": "Allows calling methods of components on any GameObject that is part of this planet on Start.",
+          "items": {
+            "$ref": "#/definitions/MethodModule"
+          }
+        }
+      }
+    },
+    "FieldModule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Path from the root body to the GameObject with the component. \nDoes not include the root body name (e.x., don't include BrittleHollow_Body for Brittle Hollow)"
+        },
+        "componentType": {
+          "type": "string",
+          "description": "Type name of the component on the GameObject you want to modify."
+        },
+        "fieldName": {
+          "type": "string",
+          "description": "Name of the field on the component."
+        },
+        "value": {
+          "description": "The value you want to set the attribute to."
+        }
+      }
+    },
+    "MethodModule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Path from the root body to the GameObject with the component. \nDoes not include the root body name (e.x., don't include BrittleHollow_Body for Brittle Hollow)"
+        },
+        "componentType": {
+          "type": "string",
+          "description": "Type name of the component on the GameObject you want to modify."
+        },
+        "methodName": {
+          "type": "string",
+          "description": "Name of the method on the component."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "The values you want to pass through to the method. Optional.",
+          "items": {}
+        }
+      }
     }
   },
   "$docs": {
